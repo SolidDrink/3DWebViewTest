@@ -1,5 +1,5 @@
 由於aar檔案超過github容許大小
-請到https://drive.google.com/drive/u/0/folders/1keHJ47vhaP0-f5jnsptWzXjFhZmJpGUE額外下載檔案
+請額外下載檔案: https://drive.google.com/drive/u/0/folders/1keHJ47vhaP0-f5jnsptWzXjFhZmJpGUE  
 下載好請放置於 "Assets/Vuplex/WebView/AndroidGecko/Plugins/libs/" 資料夾底下
 
 專案build需要keystore
