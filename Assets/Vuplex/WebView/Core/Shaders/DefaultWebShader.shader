@@ -155,9 +155,7 @@ Shader "Vuplex/Default Web Shader" {
 
                     // Color correction to convert gamma to linear space.
                     // This is performed last so it doesn't effect cutout rect functionality.
-                    // Unity 2023.1 and 2023.2 have a bug where color correction is applied automatically for Vulkan on Android,
-                    // so color correction is skipped in that scenario.
-                    #if !defined(UNITY_COLORSPACE_GAMMA) && !(defined(SHADER_API_VULKAN) && UNITY_VERSION >= 202300)
+                    #if !defined(UNITY_COLORSPACE_GAMMA)
                         col = float4(GammaToLinearSpace(col.xyz), col.w);
                     #endif
 

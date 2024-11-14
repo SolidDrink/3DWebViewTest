@@ -117,6 +117,8 @@ namespace Vuplex.WebView {
             }
         }
 
+        void OnDisable() => _webViewPrefab.WebView.PostMessage("{\"type\": \"keyboard.hidden\"}");
+
         void WebView_MessageEmitted(object sender, EventArgs<string> e) {
 
             var serializedMessage = e.Value;

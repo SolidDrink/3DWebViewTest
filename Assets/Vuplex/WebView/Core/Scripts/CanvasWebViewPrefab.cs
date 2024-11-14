@@ -92,7 +92,7 @@ namespace Vuplex.WebView {
         ///   <item>Native 2D Mode requires that the canvas's render mode be set to "Screen Space - Overlay".</item>
         /// </list>
         /// </remarks>
-        [Label("Native 2D Mode (Android, iOS, WebGL, and UWP only)")]
+        [Label("Native 2D Mode (Android, iOS, WebGL, & UWP only)")]
         [Tooltip("Native 2D Mode positions a native 2D webview in front of the Unity game view instead of rendering web content as a texture in the Unity scene. Native 2D Mode provides better performance on iOS and UWP, because the default mode of rendering web content to a texture is slower. \n\nImportant notes:\n• Native 2D Mode is only supported for Android (non-Gecko), iOS, WebGL, and UWP. For the other 3D WebView packages, the default render mode is used instead.\n• Native 2D Mode requires that the canvas's render mode be set to \"Screen Space - Overlay\".")]
         [HideInInspector]
         [Header("Platform-specific")]
@@ -109,6 +109,7 @@ namespace Vuplex.WebView {
         /// <list type="bullet">
         ///   <item>3D WebView for Android (non-Gecko)</item>
         ///   <item>3D WebView for iOS</item>
+        ///   <item>3D WebView for visionOS</item>
         /// </list>
         /// </remarks>
         /// <remarks>
@@ -116,13 +117,10 @@ namespace Vuplex.WebView {
         /// but you can use Unity's [TouchScreenKeyboard](https://docs.unity3d.com/ScriptReference/TouchScreenKeyboard.html)
         /// API to show the keyboard and then send typed characters to the webview like described in [this article](https://support.vuplex.com/articles/how-to-use-a-third-party-keyboard).
         /// </remarks>
-        /// <remarks>
-        /// On iOS, disabling the keyboard for one webview disables it for all webviews.
-        /// </remarks>
         /// <seealso cref="IWithNativeOnScreenKeyboard"/>
         /// <seealso cref="KeyboardEnabled"/>
-        [Label("Native On-Screen Keyboard (Android and iOS only)")]
-        [Tooltip("Determines whether the operating system's native on-screen keyboard is automatically shown when a text input in the webview is focused. The native on-screen keyboard is only supported for the following packages:\n• 3D WebView for Android (non-Gecko)\n• 3D WebView for iOS")]
+        [Label("Native On-Screen Keyboard (Android, iOS, & visionOS only)")]
+        [Tooltip("Determines whether the operating system's native on-screen keyboard is automatically shown when a text input in the webview is focused. The native on-screen keyboard is only supported for the following packages:\n• 3D WebView for Android (non-Gecko)\n• 3D WebView for iOS\n• 3D WebView for visionOS")]
         public bool NativeOnScreenKeyboardEnabled = true;
 
         /// <summary>
@@ -346,7 +344,6 @@ namespace Vuplex.WebView {
             _rectTransform.GetWorldCorners(worldCorners);
             var topLeftCorner = worldCorners[1];
             var bottomRightCorner = worldCorners[3];
-
             if (canvas.renderMode != RenderMode.ScreenSpaceOverlay) {
                 var camera = canvas.worldCamera;
                 if (camera == null) {
@@ -359,8 +356,8 @@ namespace Vuplex.WebView {
             }
             var x = topLeftCorner.x;
             var y = Screen.height - topLeftCorner.y;
-            var width = bottomRightCorner.x - topLeftCorner.x;
-            var height = topLeftCorner.y - bottomRightCorner.y;
+            var width = Math.Abs(bottomRightCorner.x - topLeftCorner.x);
+            var height = Math.Abs(topLeftCorner.y - bottomRightCorner.y);
             var scaleFactor = _getScreenSpaceScaleFactor();
             if (scaleFactor != 1f) {
                 x *= scaleFactor;

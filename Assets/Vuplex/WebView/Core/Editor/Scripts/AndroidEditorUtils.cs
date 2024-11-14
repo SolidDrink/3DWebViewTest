@@ -104,7 +104,10 @@ namespace Vuplex.WebView.Editor {
 
         static void _updateNativePluginSettings(string fileName) {
 
-            #if UNITY_2019_1_OR_NEWER
+            // Allow the application to define VUPLEX_ANDROID_DISABLE_FORCE_PLUGIN_PRELOAD in the case where
+            // it uses Vulkan with Native 2D Mode and needs to avoid preloading the native plugins because
+            // not all of the target devices support the required VK_ANDROID_external_memory_android_hardware_buffer extension.
+            #if UNITY_2019_1_OR_NEWER && !VUPLEX_ANDROID_DISABLE_FORCE_PLUGIN_PRELOAD
                 var pluginAbsolutePaths = Directory.GetFiles(Application.dataPath, fileName, SearchOption.AllDirectories).ToList();
                 // PluginImporter.GetAtPath() requires a relative path and doesn't support absolute paths.
                 var pluginRelativePaths = pluginAbsolutePaths.Select(path => path.Replace(Application.dataPath, "Assets"));

@@ -16,7 +16,7 @@ using System;
 namespace Vuplex.WebView {
 
     /// <summary>
-    /// Event args for IWithAuth.AuthRequested. Either Continue() or Cancel() must be called in order
+    /// Event args for <see cref="IWithAuth.AuthRequested"/>. Either Continue() or Cancel() must be called in order
     /// to resume the page.
     /// </summary>
     public class AuthRequestedEventArgs : EventArgs {

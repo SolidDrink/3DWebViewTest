@@ -28,7 +28,7 @@ MonoBehaviour:
   sceneSupport: 0
   boundaryVisibilitySupport: 0
   disableBackups: 1
-  enableNSCConfig: 1
+  enableNSCConfig: 0
   securityXmlPath: 
   skipUnneededShaders: 0
   enableIL2CPPLTO: 0

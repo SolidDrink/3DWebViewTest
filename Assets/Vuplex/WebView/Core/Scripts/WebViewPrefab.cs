@@ -67,6 +67,7 @@ namespace Vuplex.WebView {
         /// <list type="bullet">
         ///   <item>3D WebView for Android (non-Gecko)</item>
         ///   <item>3D WebView for iOS</item>
+        ///   <item>3D WebView for visionOS</item>
         /// </list>
         /// </remarks>
         /// <remarks>
@@ -74,14 +75,11 @@ namespace Vuplex.WebView {
         /// but you can use Unity's [TouchScreenKeyboard](https://docs.unity3d.com/ScriptReference/TouchScreenKeyboard.html)
         /// API to show the keyboard and then send typed characters to the webview like described in [this article](https://support.vuplex.com/articles/how-to-use-a-third-party-keyboard).
         /// </remarks>
-        /// <remarks>
-        /// On iOS, disabling the keyboard for one webview disables it for all webviews.
-        /// </remarks>
         /// <seealso cref="IWithNativeOnScreenKeyboard"/>
         /// <seealso cref="KeyboardEnabled"/>
-        [Label("Native On-Screen Keyboard (Android and iOS only)")]
+        [Label("Native On-Screen Keyboard (Android, iOS, & visionOS only)")]
         [Header("Platform-specific")]
-        [Tooltip("Determines whether the operating system's native on-screen keyboard is automatically shown when a text input in the webview is focused. The native on-screen keyboard is only supported for the following packages:\n• 3D WebView for Android (non-Gecko)\n• 3D WebView for iOS")]
+        [Tooltip("Determines whether the operating system's native on-screen keyboard is automatically shown when a text input in the webview is focused. The native on-screen keyboard is only supported for the following packages:\n• 3D WebView for Android (non-Gecko)\n• 3D WebView for iOS\n• 3D WebView for visionOS")]
         public bool NativeOnScreenKeyboardEnabled;
 
         /// <summary>

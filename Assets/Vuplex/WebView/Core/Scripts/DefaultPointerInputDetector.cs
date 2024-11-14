@@ -27,7 +27,7 @@ namespace Vuplex.WebView {
     [HelpURL("https://developer.vuplex.com/webview/IPointerInputDetector")]
     public class DefaultPointerInputDetector : MonoBehaviour,
                                                IPointerInputDetector,
-                                            #if VUPLEX_MRTK
+                                            #if VUPLEX_MRTK && !VUPLEX_IGNORE_MRTK
                                                IMixedRealityPointerHandler,
                                                // When using MRTK, don't implement the standard Unity event interfaces because
                                                // it causes CanvasWebViewPrefab to receive click events twice (once through MRTK and

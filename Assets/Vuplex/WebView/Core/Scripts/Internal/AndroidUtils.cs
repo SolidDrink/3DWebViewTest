@@ -44,18 +44,6 @@ namespace Vuplex.WebView.Internal {
             return new Material(Resources.Load<Material>("AndroidWebMaterial"));
         }
 
-        public static byte[] ConvertFromJavaByteArray(AndroidJavaObject arrayObject) {
-
-            // Unity 2019.1 and newer logs a warning that converting from byte[] is obsolete
-            // but older versions are incapable of converting from sbyte[].
-            #if UNITY_2019_1_OR_NEWER
-                return (byte[])(Array)AndroidJNIHelper.ConvertFromJNIArray<sbyte[]>(arrayObject.GetRawObject());
-            #else
-                return AndroidJNIHelper.ConvertFromJNIArray<byte[]>(arrayObject.GetRawObject());
-            #endif
-        }
-
-
         public static bool DeviceIsMetaQuest() {
 
             // Note: this method used to use deviceName, but its value may be "<unknown>" in some cases.

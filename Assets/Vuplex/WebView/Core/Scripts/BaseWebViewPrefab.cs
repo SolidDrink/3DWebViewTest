@@ -83,7 +83,7 @@ namespace Vuplex.WebView {
         /// The default is `true`. CursorIconsEnabled is currently only supported by 3D WebView for Windows and macOS.
         /// </summary>
         /// <seealso cref="IWithCursorType"/>
-        [Label("Cursor Icons Enabled (Windows and macOS only)")]
+        [Label("Cursor Icons Enabled (Windows & macOS only)")]
         [Tooltip("(Windows and macOS only) Sets whether the mouse cursor icon is automatically updated based on interaction with the web page. For example, hovering over a link causes the mouse cursor icon to turn into a pointer hand.")]
         public bool CursorIconsEnabled = true;
 
@@ -195,7 +195,7 @@ namespace Vuplex.WebView {
         /// </code>
         /// </example>
         /// <seealso cref="IWithPixelDensity"/>
-        [Label("Pixel Density (Windows and macOS only)")]
+        [Label("Pixel Density (Windows & macOS only)")]
         [Tooltip("(Windows and macOS only) Sets the webview's pixel density.")]
         public float PixelDensity = 1;
 

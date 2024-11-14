@@ -20,7 +20,7 @@ namespace Vuplex.WebView {
     /// <summary>
     /// Mock IWebPlugin implementation used for running in the Unity editor.
     /// </summary>
-    class MockWebPlugin : IWebPlugin {
+    public class MockWebPlugin : IWebPlugin {
 
         public ICookieManager CookieManager { get; } = MockCookieManager.Instance;
 

@@ -23,16 +23,6 @@ namespace Vuplex.WebView {
         /// <summary>
         /// Enables or disables the native on-screen keyboard.
         /// </summary>
-        /// <remarks>
-        /// The native on-screen keyboard is only supported for the following packages:
-        /// <list type="bullet">
-        ///   <item>3D WebView for Android (non-Gecko)</item>
-        ///   <item>3D WebView for iOS</item>
-        /// </list>
-        /// </remarks>
-        /// <remarks>
-        /// On iOS, disabling the keyboard for one webview disables it for all webviews.
-        /// </remarks>
         void SetNativeOnScreenKeyboardEnabled(bool enabled);
     }
 }

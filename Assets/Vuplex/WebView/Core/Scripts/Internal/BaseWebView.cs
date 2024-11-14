@@ -508,12 +508,20 @@ namespace Vuplex.WebView.Internal {
 
             _warnIfAbnormallyLarge(width, height);
             var textureFormat = _getTextureFormat();
+            // Note: The `linear` parameter is set to true to prevent the following issues that occur when it's set to false:
+            // - When running on Android with Vulkan and Unity >= 2023.1, color space conversion occurs automatically,
+            //   and since color conversion is performed in the shader, colors are overcorrected to be too dark.
+            // - When running on Windows with Unity >= 6, the following warning is logged to the console:
+            //   > d3d11: Creating a default shader resource view with dxgi-fmt=91 for a texture that uses dxgi-fmt=87
+            //   I found that if I changed 3D WebView's native plugin to use DXGI_FORMAT_B8G8R8A8_UNORM_SRGB (91) instead of
+            //   DXGI_FORMAT_B8G8R8A8_UNORM (87), that caused color space correction to occur automatically like it does
+            //   for Android Vulkan.
             var texture = new Texture2D(
                 width,
                 height,
                 textureFormat,
                 false,
-                false
+                true
             );
             #if UNITY_2020_2_OR_NEWER
                 var originalTexture = texture;
@@ -528,7 +536,7 @@ namespace Vuplex.WebView.Internal {
                     height,
                     textureFormat,
                     false,
-                    false,
+                    true,
                     originalTexture.GetNativeTexturePtr()
                 );
                 // Destroy the original texture so that its memory is released.
@@ -550,7 +558,7 @@ namespace Vuplex.WebView.Internal {
                 Size.y,
                 0,
                 RenderTextureFormat.Default,
-                RenderTextureReadWrite.Linear
+                RenderTextureReadWrite.Default
             );
             RenderTexture previousRenderTexture = RenderTexture.active;
             RenderTexture.active = tempRenderTexture;
@@ -569,6 +577,16 @@ namespace Vuplex.WebView.Internal {
             RenderTexture.active = previousRenderTexture;
             RenderTexture.ReleaseTemporary(tempRenderTexture);
             return readableTexture;
+        }
+
+        static string _getRenderPipelineName() {
+
+            #if UNITY_2019_3_OR_NEWER
+                // Use the new API to prevent Unity 6 from showing a "Script Updating Consent" popup.
+                return GraphicsSettings.defaultRenderPipeline?.ToString() ?? "default";
+            #else
+                return GraphicsSettings.renderPipelineAsset?.ToString() ?? "default";
+            #endif
         }
 
         Task<string> _getSelectedText() {
@@ -885,7 +903,7 @@ namespace Vuplex.WebView.Internal {
                 #if UNITY_2019_3_OR_NEWER
                     ["Rendering threading mode"] = SystemInfo.renderingThreadingMode,
                 #endif
-                    ["Render pipeline"] = GraphicsSettings.renderPipelineAsset?.ToString() ?? "default",
+                    ["Render pipeline"] = _getRenderPipelineName(),
                 #if UNITY_2018_2_OR_NEWER
                     ["SRP Batcher"] = GraphicsSettings.useScriptableRenderPipelineBatching,
                 #endif

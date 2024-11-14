@@ -16,13 +16,13 @@ using System;
 namespace Vuplex.WebView {
 
     /// <summary>
-    /// An interface implemented by a webview if it supports entering credentials for [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+    /// An interface implemented by a webview if it supports entering credentials for <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP authentication</see>
     /// and/or connecting to a proxy server.
     /// </summary>
     public interface IWithAuth {
 
         /// <summary>
-        /// Indicates that the browser has requested credentials from the user, either because a server requested [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+        /// Indicates that the browser has requested credentials from the user, either because a server requested <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP authentication</see>
         /// or because credentials are needed for connecting to a proxy server.
         /// </summary>
         /// <remarks>
@@ -30,7 +30,7 @@ namespace Vuplex.WebView {
         /// and the page will not be paused. If a handler is attached to this event, then the page will
         /// be paused until Continue() or Cancel() is called.
         ///
-        /// You can test basic HTTP auth using [this page](https://jigsaw.w3.org/HTTP/Basic/)
+        /// You can test basic HTTP auth using <see href="https://jigsaw.w3.org/HTTP/Basic/">this page</see>
         /// with the username "guest" and the password "guest".
         /// </remarks>
         /// <remarks>
